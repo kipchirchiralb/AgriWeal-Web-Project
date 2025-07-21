@@ -30,3 +30,15 @@ CREATE TABLE batches (
 );
 
 
+CREATE TABLE farmer_batches (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    farmer_id INT,
+    batch_id INT,
+    seedlings_bought INT,
+    date_purchased DATE,
+    FOREIGN KEY (farmer_id) REFERENCES farmers(id),
+    FOREIGN KEY (batch_id) REFERENCES batches(id)
+);
+
+
+
