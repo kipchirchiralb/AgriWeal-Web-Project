@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AgriWeal Dashboard</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container my-4">
+      <h1 class="mb-4">AgriWeal Dashboard</h1>
+      <!-- Summary Cards -->
+      <div class="row mb-4">
+        <div class="col-md-3">
+          <div class="card text-bg-primary mb-3">
+            <div class="card-body">
+              <h5 class="card-title">Farmers</h5>
+              <p class="card-text fs-2"><%= farmers ? farmers.length : 0 %></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card text-bg-success mb-3">
+            <div class="card-body">
+              <h5 class="card-title">Crops</h5>
+              <p class="card-text fs-2"><%= crops ? crops.length : 0 %></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card text-bg-warning mb-3">
+            <div class="card-body">
+              <h5 class="card-title">Batches</h5>
+              <p class="card-text fs-2"><%= batches ? batches.length : 0 %></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card text-bg-info mb-3">
+            <div class="card-body">
+              <h5 class="card-title">Seedling Purchases</h5>
+              <p class="card-text fs-2">
+                <%= farmerBatches ? farmerBatches.length : 0 %>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Farmers Table -->
+      <h2>Farmers</h2>
+      <div class="table-responsive mb-4">
+        <table class="table table-bordered table-hover">
+          <thead class="table-light">
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th>Location</th>
+              <th>Created At</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (farmers && farmers.length) { %> <% farmers.forEach(farmer =>
+            { %>
+            <tr>
+              <td><%= farmer.id %></td>
+              <td><%= farmer.name %></td>
+              <td><%= farmer.phone %></td>
+              <td><%= farmer.email %></td>
+              <td><%= farmer.location %></td>
+              <td><%= new Date(farmer.created_at).toLocaleDateString() %></td>
+            </tr>
+            <% }) %> <% } else { %>
+            <tr>
+              <td colspan="6" class="text-center">No farmers found.</td>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+      <!-- Crops Table -->
+      <h2>Crops</h2>
+      <div class="table-responsive mb-4">
+        <table class="table table-bordered table-hover">
+          <thead class="table-light">
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Nursery Days</th>
+              <th>Days to Harvest</th>
+              <th>Harvest Duration (days)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (crops && crops.length) { %> <% crops.forEach(crop => { %>
+            <tr>
+              <td><%= crop.id %></td>
+              <td><%= crop.name %></td>
+              <td><%= crop.nursery_days %></td>
+              <td><%= crop.days_to_harvest %></td>
+              <td><%= crop.harvest_duration_days %></td>
+            </tr>
+            <% }) %> <% } else { %>
+            <tr>
+              <td colspan="5" class="text-center">No crops found.</td>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+      <!-- Batches Table -->
+      <h2>Batches</h2>
+      <div class="table-responsive mb-4">
+        <table class="table table-bordered table-hover">
+          <thead class="table-light">
+            <tr>
+              <th>ID</th>
+              <th>Crop</th>
+              <th>Variety</th>
+              <th>Date Sown</th>
+              <th>Expected Transplant</th>
+              <th>Harvest Start</th>
+              <th>Harvest End</th>
+              <th>Total Seedlings</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (batches && batches.length) { %> <% batches.forEach(batch => {
+            %>
+            <tr>
+              <td><%= batch.id %></td>
+              <td>
+                <%= (crops && crops.find(c => c.id === batch.crop_id)?.name) ||
+                'N/A' %>
+              </td>
+              <td><%= batch.variety %></td>
+              <td><%= new Date(batch.date_sown).toLocaleDateString() %></td>
+              <td>
+                <%= new
+                Date(batch.expected_transplant_date).toLocaleDateString() %>
+              </td>
+              <td>
+                <%= new Date(batch.expected_harvest_start).toLocaleDateString()
+                %>
+              </td>
+              <td>
+                <%= new Date(batch.expected_harvest_end).toLocaleDateString() %>
+              </td>
+              <td><%= batch.total_seedlings %></td>
+            </tr>
+            <% }) %> <% } else { %>
+            <tr>
+              <td colspan="8" class="text-center">No batches found.</td>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+      <!-- Farmer Batches Table -->
+      <h2>Seedling Purchases</h2>
+      <div class="table-responsive mb-4">
+        <table class="table table-bordered table-hover">
+          <thead class="table-light">
+            <tr>
+              <th>ID</th>
+              <th>Farmer</th>
+              <th>Batch</th>
+              <th>Seedlings Bought</th>
+              <th>Date Purchased</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (farmerBatches && farmerBatches.length) { %> <%
+            farmerBatches.forEach(fb => { %>
+            <tr>
+              <td><%= fb.id %></td>
+              <td>
+                <%= (farmers && farmers.find(f => f.id === fb.farmer_id)?.name)
+                || 'N/A' %>
+              </td>
+              <td>
+                <%= (batches && batches.find(b => b.id ===
+                fb.batch_id)?.variety) || 'N/A' %>
+              </td>
+              <td><%= fb.seedlings_bought %></td>
+              <td><%= new Date(fb.date_purchased).toLocaleDateString() %></td>
+            </tr>
+            <% }) %> <% } else { %>
+            <tr>
+              <td colspan="5" class="text-center">No purchases found.</td>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
