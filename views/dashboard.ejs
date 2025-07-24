@@ -15,25 +15,55 @@
       <!-- Summary Cards -->
       <div class="row mb-4">
         <div class="col-md-3">
-          <div class="card text-bg-primary mb-3">
+          <div class="card text-bg-primary mb-3 position-relative">
             <div class="card-body">
-              <h5 class="card-title">Farmers</h5>
+              <h5 class="card-title">
+                Farmers
+                <button
+                  type="button"
+                  class="btn btn-light btn-sm position-absolute top-0 end-0 m-2"
+                  data-bs-toggle="modal"
+                  data-bs-target="#addFarmerModal"
+                >
+                  +
+                </button>
+              </h5>
               <p class="card-text fs-2"><%= farmers ? farmers.length : 0 %></p>
             </div>
           </div>
         </div>
         <div class="col-md-3">
-          <div class="card text-bg-success mb-3">
+          <div class="card text-bg-success mb-3 position-relative">
             <div class="card-body">
-              <h5 class="card-title">Crops</h5>
+              <h5 class="card-title">
+                Crops
+                <button
+                  type="button"
+                  class="btn btn-light btn-sm position-absolute top-0 end-0 m-2"
+                  data-bs-toggle="modal"
+                  data-bs-target="#addCropModal"
+                >
+                  +
+                </button>
+              </h5>
               <p class="card-text fs-2"><%= crops ? crops.length : 0 %></p>
             </div>
           </div>
         </div>
         <div class="col-md-3">
-          <div class="card text-bg-warning mb-3">
+          <div class="card text-bg-warning mb-3 position-relative">
             <div class="card-body">
-              <h5 class="card-title">Batches</h5>
+              <h5 class="card-title">
+                Batches
+                <button
+                  type="button"
+                  class="btn btn-light btn-sm position-absolute top-0 end-0 m-2"
+                  data-bs-toggle="modal"
+                  data-bs-target="#addBatchModal"
+                >
+                  +
+                </button>
+              </h5>
               <p class="card-text fs-1 fw-bold">
                 <%= batches ? batches.length : 0 %>
               </p>
@@ -41,9 +71,19 @@
           </div>
         </div>
         <div class="col-md-3">
-          <div class="card text-bg-info mb-3">
+          <div class="card text-bg-info mb-3 position-relative">
             <div class="card-body">
-              <h5 class="card-title">Seedling Purchases</h5>
+              <h5 class="card-title">
+                Seedling Purchases
+                <button
+                  type="button"
+                  class="btn btn-light btn-sm position-absolute top-0 end-0 m-2"
+                  data-bs-toggle="modal"
+                  data-bs-target="#addPurchaseModal"
+                >
+                  +
+                </button>
+              </h5>
               <p class="card-text fs-2">
                 <%= farmerBatches ? farmerBatches.length : 0 %>
               </p>
@@ -51,7 +91,381 @@
           </div>
         </div>
       </div>
+      <!-- Modals for Adding Data -->
+      <!-- Add Farmer Modal -->
+      <div
+        class="modal fade"
+        id="addFarmerModal"
+        tabindex="-1"
+        aria-labelledby="addFarmerModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form action="/add-farmer" method="POST">
+              <div class="modal-header">
+                <h5 class="modal-title" id="addFarmerModalLabel">Add Farmer</h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <div class="mb-3">
+                  <label for="farmerName" class="form-label">Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="farmerName"
+                    name="name"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="farmerPhone" class="form-label">Phone</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="farmerPhone"
+                    name="phone"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="farmerEmail" class="form-label">Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="farmerEmail"
+                    name="email"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="farmerLocation" class="form-label"
+                    >Location</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="farmerLocation"
+                    name="location"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button type="submit" class="btn btn-primary">
+                  Add Farmer
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- Add Crop Modal -->
+      <div
+        class="modal fade"
+        id="addCropModal"
+        tabindex="-1"
+        aria-labelledby="addCropModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form action="/add-crop" method="POST">
+              <div class="modal-header">
+                <h5 class="modal-title" id="addCropModalLabel">Add Crop</h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <div class="mb-3">
+                  <label for="cropName" class="form-label">Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="cropName"
+                    name="name"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="nurseryDays" class="form-label"
+                    >Nursery Days</label
+                  >
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="nurseryDays"
+                    name="nursery_days"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="daysToHarvest" class="form-label"
+                    >Days to Harvest</label
+                  >
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="daysToHarvest"
+                    name="days_to_harvest"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="harvestDuration" class="form-label"
+                    >Harvest Duration (days)</label
+                  >
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="harvestDuration"
+                    name="harvest_duration_days"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button type="submit" class="btn btn-success">Add Crop</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- Add Batch Modal -->
+      <div
+        class="modal fade"
+        id="addBatchModal"
+        tabindex="-1"
+        aria-labelledby="addBatchModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form action="/add-batch" method="POST">
+              <div class="modal-header">
+                <h5 class="modal-title" id="addBatchModalLabel">Add Batch</h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <div class="mb-3">
+                  <label for="batchCropId" class="form-label">Crop</label>
+                  <select
+                    class="form-select"
+                    id="batchCropId"
+                    name="crop_id"
+                    required
+                  >
+                    <% if (crops && crops.length) { crops.forEach(crop => { %>
+                    <option value="<%= crop.id %>"><%= crop.name %></option>
+                    <% }) } %>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="batchVariety" class="form-label">Variety</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="batchVariety"
+                    name="variety"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="dateSown" class="form-label">Date Sown</label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="dateSown"
+                    name="date_sown"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="expectedTransplantDate" class="form-label"
+                    >Expected Transplant Date</label
+                  >
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="expectedTransplantDate"
+                    name="expected_transplant_date"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="expectedHarvestStart" class="form-label"
+                    >Harvest Start</label
+                  >
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="expectedHarvestStart"
+                    name="expected_harvest_start"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="expectedHarvestEnd" class="form-label"
+                    >Harvest End</label
+                  >
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="expectedHarvestEnd"
+                    name="expected_harvest_end"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="totalSeedlings" class="form-label"
+                    >Total Seedlings</label
+                  >
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="totalSeedlings"
+                    name="total_seedlings"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button type="submit" class="btn btn-warning">Add Batch</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- Add Purchase Modal -->
+      <div
+      class="modal fade"
+      id="addPurchaseModal"
+      tabindex="-1"
+      aria-labelledby="addPurchaseModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form action="/add-purchase" method="POST">
+            <div class="modal-header">
+              <h5 class="modal-title" id="addPurchaseModalLabel">
+                Add Seedling Purchase
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                <label for="purchaseFarmerId" class="form-label"
+                  >Farmer</label
+                >
+                <select
+                  class="form-select"
+                  id="purchaseFarmerId"
+                  name="farmer_id"
+                  required
+                >
+                  <% if (farmers && farmers.length) { farmers.forEach(farmer=> { %>
+                  <option value="<%= farmer.id %>"><%= farmer.name %></option>
+                  <% }) } %>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="purchaseBatchId" class="form-label">Batch</label>
+                <select
+                  class="form-select"
+                  id="purchaseBatchId"
+                  name="batch_id"
+                  required
+                >
+                  <% if (batches && batches.length) { batches.forEach(batch =>
+                  { %>
+                  <option value="<%= batch.id %>">
+                    <%= batch.variety %> for <b>  <%= new Date(batch.expected_transplant_date).toLocaleDateString() %></b>
+                  </option>
+                  <% }) } %>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="seedlingsBought" class="form-label"
+                  >Seedlings Bought</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  id="seedlingsBought"
+                  name="seedlings_bought"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="datePurchased" class="form-label"
+                  >Date Purchased</label
+                >
+                <input
+                  type="date"
+                  class="form-control"
+                  id="datePurchased"
+                  name="date_purchased"
+                  required
+                />
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="submit" class="btn btn-info">Add Purchase</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
       <!-- Farmers Table -->
+
       <h2>Farmers</h2>
       <div class="table-responsive mb-4">
         <table class="table table-bordered table-hover">
