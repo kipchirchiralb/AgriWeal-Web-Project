@@ -11,7 +11,7 @@
   </head>
   <body>
     <div class="container my-4">
-      <h1 class="mb-4">AgriWeal Dashboard</h1>
+      <h1 class="mb-6">AgriWeal Dashboard</h1>
       <!-- Summary Cards -->
       <div class="row mb-4">
         <div class="col-md-3">
@@ -34,7 +34,9 @@
           <div class="card text-bg-warning mb-3">
             <div class="card-body">
               <h5 class="card-title">Batches</h5>
-              <p class="card-text fs-2"><%= batches ? batches.length : 0 %></p>
+              <p class="card-text fs-1 fw-bold">
+                <%= batches ? batches.length : 0 %>
+              </p>
             </div>
           </div>
         </div>

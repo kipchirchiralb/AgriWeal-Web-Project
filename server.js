@@ -8,6 +8,8 @@ const dbConn = mysql.createConnection({
   database: "agriweal",
 });
 const app = express();
+
+
 app.get("/", (req, res) => {
   res.redirect("/dashboard");
 });
